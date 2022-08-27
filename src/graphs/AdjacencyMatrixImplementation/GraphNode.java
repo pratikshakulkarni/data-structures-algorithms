@@ -1,4 +1,4 @@
-package graphs;
+package graphs.AdjacencyMatrixImplementation;
 
 public class GraphNode {
     public String name;
