@@ -3,6 +3,30 @@ package graphs.AdjacencyListImplementation;
 import java.util.ArrayList;
 
 public class AdjacencyListImplementation {
+
+    public static void createUndirectedGraph(Graph g){
+        g.addUndirectedEdges(0,1);
+        g.addUndirectedEdges(0,2);
+        g.addUndirectedEdges(0,3);
+        g.addUndirectedEdges(1,4);
+        g.addUndirectedEdges(2,3);
+        g.addUndirectedEdges(3,4);
+    }
+
+    public static void createDirectedGraph(Graph g){
+        g.addDirectedEdges(0,2);
+        g.addDirectedEdges(2 ,4);
+        g.addDirectedEdges(4,7);
+        g.addDirectedEdges(4,5);
+        g.addDirectedEdges(5,6);
+        g.addDirectedEdges(1,2);
+        g.addDirectedEdges(1,3);
+        g.addDirectedEdges(5,5);
+    }
+    private static void makeNodeUnvisited(ArrayList<GraphNode> graphNodes) {
+        graphNodes.forEach(node -> {node.isVisited=false;});
+    }
+
     public static void main(String[] args) {
         ArrayList<GraphNode> graphNodes = new ArrayList<>();
 
@@ -11,26 +35,23 @@ public class AdjacencyListImplementation {
         graphNodes.add(new GraphNode("C",2));
         graphNodes.add(new GraphNode("D",3));
         graphNodes.add(new GraphNode("E",4));
+        graphNodes.add(new GraphNode("F",5));
+        graphNodes.add(new GraphNode("H",6));
+        graphNodes.add(new GraphNode("G",7));
 
         Graph g = new Graph(graphNodes);
-
-        g.addUndirectedEdges(0,1);
-        g.addUndirectedEdges(0,2);
-        g.addUndirectedEdges(0,3);
-        g.addUndirectedEdges(1,4);
-        g.addUndirectedEdges(2,3);
-        g.addUndirectedEdges(3,4);
-
+        //createUndirectedGraph(g);
+        createDirectedGraph(g);
         System.out.println(g.toString());
-
         System.out.println("BFS : ");
         g.bfs();
-
-        graphNodes.forEach(node -> {
-            node.isVisited=false;
-        });
-
+        makeNodeUnvisited(graphNodes);
         System.out.println("\n DFS: ");
         g.dfs();
+        makeNodeUnvisited(graphNodes);
+        System.out.println("\n Topological sort");
+        g.topologicalSort();
     }
+
+
 }

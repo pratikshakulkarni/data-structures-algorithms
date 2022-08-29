@@ -18,6 +18,12 @@ public class Graph {
         second.neighbours.add(first);
     }
 
+    public void addDirectedEdges(int i, int j){
+        GraphNode first = nodes.get(i);
+        GraphNode second = nodes.get(j);
+        first.neighbours.add(second);
+    }
+
     public String toString(){
         StringBuilder s = new StringBuilder();
 
@@ -80,4 +86,28 @@ public class Graph {
                 dfsHelper(node);
         }
     }
+
+     void topologicalSortHelper(GraphNode node, Stack<GraphNode> stack) {
+        for(GraphNode neighbour : node.neighbours){
+            if(!neighbour.isVisited){
+                topologicalSortHelper(neighbour,stack);
+            }
+        }
+        node.isVisited = true;
+        stack.push(node);
+    }
+
+    public void topologicalSort(){
+        Stack<GraphNode> stack = new Stack<>();
+        for(GraphNode node :nodes){
+            if(!node.isVisited){
+                topologicalSortHelper(node,stack);
+            }
+        }
+        while (!stack.isEmpty()){
+            System.out.print(stack.pop().name+" ");
+        }
+    }
+
+
 }
