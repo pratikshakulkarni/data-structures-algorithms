@@ -30,5 +30,7 @@ public class AdjacencyMatrix {
         g.addUndirectedEdge(3,4);
 
         System.out.printf(g.toString());
+
+        g.bfs();
     }
 }
