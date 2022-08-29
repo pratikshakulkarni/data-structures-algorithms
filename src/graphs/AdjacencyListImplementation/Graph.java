@@ -57,4 +57,27 @@ public class Graph {
                 bfsHelper(node);
         }
     }
+
+    public void dfsHelper(GraphNode node){
+        Stack<GraphNode> stack = new Stack<>();
+        stack.push(node);
+        while (!stack.isEmpty()){
+            GraphNode currentNode = stack.pop();
+            currentNode.isVisited=true;
+            System.out.print(currentNode.name+" ");
+            for(GraphNode neighbour : currentNode.neighbours){
+                if(!neighbour.isVisited){
+                    stack.push(neighbour);
+                    neighbour.isVisited=true;
+                }
+            }
+        }
+    }
+
+    public void dfs(){
+        for(GraphNode node : nodes){
+            if(!node.isVisited)
+                dfsHelper(node);
+        }
+    }
 }

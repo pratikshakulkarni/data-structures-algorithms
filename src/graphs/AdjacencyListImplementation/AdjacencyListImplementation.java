@@ -23,6 +23,14 @@ public class AdjacencyListImplementation {
 
         System.out.println(g.toString());
 
+        System.out.println("BFS : ");
         g.bfs();
+
+        graphNodes.forEach(node -> {
+            node.isVisited=false;
+        });
+
+        System.out.println("\n DFS: ");
+        g.dfs();
     }
 }

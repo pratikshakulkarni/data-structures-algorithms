@@ -31,6 +31,12 @@ public class AdjacencyMatrix {
 
         System.out.printf(g.toString());
 
+        System.out.println("BFS ");
         g.bfs();
+
+        nodes.forEach(node -> node.isVisited=false);
+
+        System.out.println("\n DFS: ");
+        g.dfs();
     }
 }

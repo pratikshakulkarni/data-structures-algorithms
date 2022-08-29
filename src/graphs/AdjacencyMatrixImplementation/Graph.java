@@ -2,6 +2,7 @@ package graphs.AdjacencyMatrixImplementation;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Stack;
 
 public class Graph {
 
@@ -66,5 +67,29 @@ public class Graph {
             if(!node.isVisited)
                 bfsHelper(node);
         }
+    }
+
+    void dfsHelper(GraphNode node){
+        Stack<GraphNode> stack = new Stack<>();
+        stack.push(node);
+        while (!stack.isEmpty()){
+            GraphNode currentNode= stack.pop();
+            System.out.print(currentNode.name + " ");
+            currentNode.isVisited=true;
+            ArrayList<GraphNode> neighbours = getNeighbors(currentNode);
+            for(GraphNode neighbour : neighbours){
+                if(!neighbour.isVisited){
+                    stack.push(neighbour);
+                    neighbour.isVisited=true;
+                }
+            }
+        }
+    }
+
+    void dfs(){
+        nodeList.forEach(node -> {
+            if(!node.isVisited)
+                dfsHelper(node);
+        });
     }
 }
