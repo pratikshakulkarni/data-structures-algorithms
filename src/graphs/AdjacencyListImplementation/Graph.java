@@ -1,6 +1,8 @@
 package graphs.AdjacencyListImplementation;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Stack;
 
 public class Graph {
     ArrayList<GraphNode> nodes = new ArrayList<>();
@@ -31,5 +33,28 @@ public class Graph {
             s.append("\n");
         }
         return s.toString();
+    }
+
+    public void bfsHelper(GraphNode node){
+        LinkedList<GraphNode> queue = new LinkedList<>();
+        queue.add(node);
+        while (!queue.isEmpty()){
+            GraphNode currentNode = queue.remove(0);
+            System.out.print(currentNode.name + " ");
+            currentNode.isVisited=true;
+            for(GraphNode neighbour : currentNode.neighbours){
+                if(!neighbour.isVisited) {
+                    queue.add(neighbour);
+                    neighbour.isVisited=true;
+                }
+            }
+        }
+    }
+
+    public void bfs(){
+        for(GraphNode node : nodes){
+            if(!node.isVisited)
+                bfsHelper(node);
+        }
     }
 }

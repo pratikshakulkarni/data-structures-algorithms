@@ -22,5 +22,7 @@ public class AdjacencyListImplementation {
         g.addUndirectedEdges(3,4);
 
         System.out.println(g.toString());
+
+        g.bfs();
     }
 }
