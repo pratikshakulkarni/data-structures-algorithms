@@ -19,6 +19,10 @@ public class Graph {
         adjacencyMatrix[j][i] = 1;
     }
 
+    public void addDirectedEdges(int i, int j) {
+        adjacencyMatrix[i][j] = 1;
+    }
+
     public String toString() {
         StringBuilder s = new StringBuilder();
         s.append("   ");
@@ -91,5 +95,26 @@ public class Graph {
             if(!node.isVisited)
                 dfsHelper(node);
         });
+    }
+
+    public void topologicalSort(){
+        Stack<GraphNode> stack = new Stack<>();
+        for(GraphNode node : nodeList) {
+            if(!node.isVisited) {
+                topologicalSortHelper(node,stack);
+            }
+        }
+        while (!stack.isEmpty()){
+            System.out.print(stack.pop().name+" ");
+        }
+    }
+
+    private void topologicalSortHelper(GraphNode node, Stack<GraphNode> stack) {
+        ArrayList<GraphNode> neighbours = getNeighbors(node);
+        for(GraphNode neighbour : neighbours){
+            topologicalSortHelper(node,stack);
+        }
+        node.isVisited=true;
+        stack.push(node);
     }
 }
