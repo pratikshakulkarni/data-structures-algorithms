@@ -15,13 +15,13 @@ public class AdjacencyListImplementation {
 
     public static void createDirectedGraph(Graph g){
         g.addDirectedEdges(0,2);
-        g.addDirectedEdges(2 ,4);
+        g.addDirectedEdges(2,4);
         g.addDirectedEdges(4,7);
         g.addDirectedEdges(4,5);
         g.addDirectedEdges(5,6);
         g.addDirectedEdges(1,2);
         g.addDirectedEdges(1,3);
-        g.addDirectedEdges(5,5);
+        g.addDirectedEdges(3,5);
     }
     private static void makeNodeUnvisited(ArrayList<GraphNode> graphNodes) {
         graphNodes.forEach(node -> {node.isVisited=false;});
