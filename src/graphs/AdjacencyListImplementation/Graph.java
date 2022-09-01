@@ -109,5 +109,30 @@ public class Graph {
         }
     }
 
+    public static void pathFinder(GraphNode node){
+        if(node.parent != null)
+            pathFinder(node.parent);
+        System.out.print(node.name + " ");
+    }
+
+    public void bfsForSsspp(GraphNode node){
+        LinkedList<GraphNode> queue = new LinkedList<>();
+        queue.add(node);
+        while (!queue.isEmpty()){
+            GraphNode currentNode = queue.remove(0);
+            currentNode.isVisited=true;
+            System.out.print("Path " + currentNode.name + ": ");
+            pathFinder(currentNode);
+            System.out.println();
+            for(GraphNode neighbour : currentNode.neighbours){
+                if(!neighbour.isVisited){
+                    queue.add(neighbour);
+                    neighbour.isVisited=true;
+                    neighbour.parent=currentNode;
+                }
+            }
+        }
+    }
+
 
 }

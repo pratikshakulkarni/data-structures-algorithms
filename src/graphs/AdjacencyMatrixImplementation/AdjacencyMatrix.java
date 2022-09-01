@@ -20,10 +20,13 @@ public class AdjacencyMatrix {
     private static void createUndirectedGraph(Graph g){
         g.addUndirectedEdge(0,1);
         g.addUndirectedEdge(0,2);
-        g.addUndirectedEdge(0,3);
-        g.addUndirectedEdge(1,4);
+        g.addUndirectedEdge(1,3);
+        g.addUndirectedEdge(1,6);
         g.addUndirectedEdge(2,3);
-        g.addUndirectedEdge(3,4);
+        g.addUndirectedEdge(2,4);
+        g.addUndirectedEdge(3,5);
+        g.addUndirectedEdge(4,5);
+        g.addUndirectedEdge(5,6);
     }
 
     private static void createDirectedGraph(Graph g){
@@ -44,10 +47,12 @@ public class AdjacencyMatrix {
         nodes.add(new GraphNode("C",2));
         nodes.add(new GraphNode("D",3));
         nodes.add(new GraphNode("E",4));
+        nodes.add(new GraphNode("F",5));
+        nodes.add(new GraphNode("G",6));
 
         Graph g = new Graph(nodes);
-        //createUndirectedGraph(g);
-        createDirectedGraph(g);
+        createUndirectedGraph(g);
+        //createDirectedGraph(g);
 
         System.out.printf(g.toString());
 
@@ -60,8 +65,11 @@ public class AdjacencyMatrix {
         g.dfs();
 
         makeNodeVisitedFalse(nodes);
-        System.out.println("\n Topological sort ");
-        g.topologicalSort();
+//        System.out.println("\n Topological sort ");
+//        g.topologicalSort();
+
+        System.out.println("BFS for SSSPP");
+        g.BFSForSSSPP(nodes.get(0));
     }
 
 }
