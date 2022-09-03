@@ -12,6 +12,6 @@
     2. Traversal:
         -BFS => Breadth First Search
         -DFS => Depth First Search
-    3. Single source shortest path algorithms:
-        -BFS
+    3. Single source shortest path algorithms: (DFS doesn't work)
+        -BFS  Time Complexity => O(E) Space Complexity => O(V) (BFS for SSSPP doesn't work for weighted graph)
         -Dijkstra's Algorithm
