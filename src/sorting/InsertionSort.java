@@ -1,4 +1,4 @@
-package sortingAlgorithms;
+package sorting;
 
 /***
  @author: Pratiksha Kulkarni
