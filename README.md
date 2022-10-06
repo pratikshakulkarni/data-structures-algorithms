@@ -156,10 +156,99 @@ TC- O(n+2E)
 //for components
 O(n+2e)+O(n)
 ```
+### Bipartite Graph
+
+1. Bipartite graph is the one where, if we color the graph and there are no such adjacent nodes with
+2. same color then it is a bipartite graph.
+3. Even length cycle and linear graphs are always bipartite
+
+**Algorithm:**
+1. Maintain a color array and fill it with -1 no color.
+2. Traverse through all nodes if node is not colored pass it to BFS/DFS to color it
+
+*Bipartite Using DFS*
+```
+ color[start] = startColor;
+
+ for (int i : adj.get(start)) {
+     if (color[i] == -1) {
+         //not colored
+         int newColor = (color[start] == 0) ? 1 : 0;
+         if (!checkBipartiteDFS(color, newColor, adj, i)) return false;
+     } else if (color[i] == startColor) {
+         return false;
+     }
+ }
+ return true;
+```
+
+*Bipartite Using BFS*
+```
+ Queue<Integer> q = new LinkedList<>();
+ color[start] = 0;
+ q.add(start);
+
+ while (!q.isEmpty()) {
+     Integer node = q.poll();
+     for (Integer n : adj.get(node)) {
+         //neighbour of the node in queue -- check if it is colored or not
+         if (color[n] == -1) {
+             //not colored
+             color[n] = (color[node] == 0) ? 1 : 0;
+             q.add(n);
+         } else if (color[n] == color[node]) {
+             //neighbour of node was already colored by someone else
+             //& both colors on node and n are same so return false
+             //not bipartite
+             return false;
+         }
+     }
+ }
+ return true;
+```
+
+### Detect a cycle in a Directed graph using DFS
+
+- In directed graph the regular dfs will not work as there might be a case where the node will be visited from another path.
+and it will meet it and return true.
+- So we maintain a pathVisited array where even if any node is previously visited and had not path visited then that route can be further traverse.
+- PathVisited is also undone in each iteration -- i.e. it is backtracked to 0.
+
+**STEPS**:
+1. Maintain a pathVisited array of size V. 
+2. For each vertex call dfs();
+3. mark the node as visited and pathVisited
+4. For each neighbor of node, n is not visited then dfs(n)
+5. if n is visited and is also path visited means cycle is formed
+6. return true
+7. end for
+8. return false
+9. end
+
+
+**Code**
+```
+   vis[start] = 1;
+   pathVisited[start] = 1;
+
+   for (int i : adj.get(start)) {
+    if (vis[i] == 0) {
+     if (hasCycleDfs(i, vis, pathVisited, adj)) return true;
+    } else if (pathVisited[i] == 1)
+     return true;
+   }
+
+   pathVisited[start] = 0;
+   return false;
+  }
+```
+
+
 
 ### Topological sort using DFS
 Topological Sort : linear ordering of vertices such that there is an edge between u & v u->v. 'v' appears before 'u'.
 Only applicable for DAG.
+DFS approach uses a stack DS
 
 #### Steps:
 1. Run a loop for each vertex
@@ -186,6 +275,58 @@ dfs(node,vis,stack){
 ```
 
 ### Kahn's Algorithm | BFS Topological Sort
+
+This algorithm uses in-degree for each vertex to form the topological sort sequence.
+Queue DS is used in the process. This is a Breadth first search process. 
+
+**STEPS:** 
+
+1. In-degree of a graph:
+```
+        for (int i = 0; i < V; i++) {
+            for (int n : adj.get(i)) {
+                indegree[n]++;
+            }
+        }
+```
+
+2. add all nodes with in-degree 0 in the queue.
+3. While queue is not empty,
+   1. pop the queue = node
+   2. store the node into the result array
+   3. for each neighbour n of node relax the n i.e. reduce the in-degree of n by 1.
+   4. If in-degree of n becomes 0 add it to queue.
+4. return the result array.
+
+**Code**
+
+```
+for (int i = 0; i < V; i++) {
+    if (indegree[i] == 0) {
+        q.add(i);
+    }
+}
+
+int[] topo = new int[V];
+int k = 0;
+
+while (!q.isEmpty()) {
+    Integer j = q.remove();
+    topo[k++] = j;
+
+    for (int it : adj.get(j)) {
+        indegree[it]--;
+        if (indegree[it] == 0)
+            q.add(it);
+    }
+
+}
+return topo;
+```
+### Detect a Cycle in Directed Graph | Topological Sort | Kahn's Algorithm | BFS
+
+
+
 
 
 
