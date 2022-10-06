@@ -325,6 +325,10 @@ return topo;
 ```
 ### Detect a Cycle in Directed Graph | Topological Sort | Kahn's Algorithm | BFS
 
+1. Perform a normal topological sort on the DAG.
+2. if at the end of the algorithm if number of elements in the result array < V. Cycle is present.
+3. if result array.lenght == V no cycle. 
+
 
 
 
