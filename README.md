@@ -1,11 +1,11 @@
 # data-structures-algorithms
-##Graphs
+## Graphs
 
-###Types:
+### Types:
 - Undirected graphs UDG
 - Directed graphs DG
 
-###Conventions:
+### Conventions:
 1. Node/Vertex/V
 2. Edges/- connects 2 vertices
 3. undirected edge - bi-direction
@@ -15,12 +15,12 @@
 7. Path - Contains a lot of nodes and each of them is reachable  - no duplicate nodes in a path.
 8. Degrees - count of the incoming and outgoing edges of a node.
 
-###Properties:
+### Properties:
 1. Total degree of a graph = 2 * E (UDG)
 2. DG had in-degree and out-degree - in-degree count of incoming edges and out-degree as number of outgoing edges.
 3. Edge weight - each edge has a weight assigned, if not assume it as unit i.e. 1.
 
-###Graph representation:
+### Graph representation:
 1. Adjacency List: It is a list of lists, where there is a list of nodes and for each node there is a list of its neighbor.
 2. Adjacency Matrix:
    For a graph of # of Nodes V and Edges E, matrix is of size V*V where adj[i][j] == 1 of there exists a node between node i and node j and vice versa as graph is undirected graph.
@@ -28,7 +28,7 @@
    Time complexity is O(V^2)
 3. Note: if graph is 1 based matrix size is adj[V+1][V+1], if 0 based it is adj[v][v]==
 
-###Connected Components: 
+### Connected Components: 
 separate looking graph can also be considered as connected components, as they are a part of same graph
 without direct connection.
 When dealing with such type of graphs,
@@ -39,7 +39,7 @@ When dealing with such type of graphs,
 -mark v as visited.
 ```
 
-###Graph Traversal
+### Graph Traversal
 1. Breadth first search - (BFS)
    level wise traversal.
 
@@ -88,7 +88,7 @@ SC: O(n)
 TC: O(n)+O(2E)
 ```
 
-###CYCLE DETECTION
+### CYCLE DETECTION
 
 1. Detect a cycle in an undirected graph using BFS:
    Starting in 2 different directions and colliding at the same node which means cycle exists.
