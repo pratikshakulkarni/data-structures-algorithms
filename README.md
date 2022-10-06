@@ -1,4 +1,10 @@
 # data-structures-algorithms
+
+---
+## Trees: 
+
+
+---
 ## Graphs
 
 ### Types:
@@ -150,3 +156,38 @@ TC- O(n+2E)
 //for components
 O(n+2e)+O(n)
 ```
+
+### Topological sort using DFS
+Topological Sort : linear ordering of vertices such that there is an edge between u & v u->v. 'v' appears before 'u'.
+Only applicable for DAG.
+
+#### Steps:
+1. Run a loop for each vertex
+2. for each vertex, if it is not visited start dfs(node)
+3. In dfs - mark node as visited,
+4. Check if node has any neighbour keep traversing till no neighbour is found.
+5. Push the node without neighbor into the stack.
+6. Follow this fo each non visited node.
+7. Pop all the elements from stack - the sequence is the topological sort.
+
+```
+for(each node){
+    dfs(node,vis,stack);
+}
+dfs(node,vis,stack){
+    vis[node]=1;
+     for (int i : adj.get(node)) {
+        if (vis[i] == 0) {
+           dfs(i, vis, stack, adj);
+        }
+     }
+    stack.push(node);
+}
+```
+
+### Kahn's Algorithm | BFS Topological Sort
+
+
+
+
+
