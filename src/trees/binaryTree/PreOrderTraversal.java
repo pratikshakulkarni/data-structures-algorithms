@@ -1,22 +1,21 @@
 package trees.binaryTree;
-
 import java.util.*;
 
-class Node {
+class PreNode {
  int data;
- Node left, right;
- Node(int data) {
+ PreNode left, right;
+ PreNode(int data) {
   this.data = data;
   left = null;
   right = null;
  }
- Node() {
+ PreNode() {
 
  }
 }
 
 public class PreOrderTraversal {
- static void preOrderTrav(Node curr, ArrayList < Integer > preOrder) {
+ static void preOrderTrav(PreNode curr, ArrayList < Integer > preOrder) {
   if (curr == null)
    return;
 
@@ -27,16 +26,16 @@ public class PreOrderTraversal {
 
  public static void main(String args[]) {
 
-  Node root = new Node(1);
-  root.left = new Node(2);
-  root.right = new Node(3);
-  root.left.left = new Node(4);
-  root.left.right = new Node(5);
-  root.left.right.left = new Node(8);
-  root.right.left = new Node(6);
-  root.right.right = new Node(7);
-  root.right.right.left = new Node(9);
-  root.right.right.right = new Node(10);
+  PreNode root = new PreNode(1);
+  root.left = new PreNode(2);
+  root.right = new PreNode(3);
+  root.left.left = new PreNode(4);
+  root.left.right = new PreNode(5);
+  root.left.right.left = new PreNode(8);
+  root.right.left = new PreNode(6);
+  root.right.right = new PreNode(7);
+  root.right.right.left = new PreNode(9);
+  root.right.right.right = new PreNode(10);
 
   ArrayList < Integer > preOrder = new ArrayList < > ();
   preOrderTrav(root, preOrder);
@@ -45,6 +44,5 @@ public class PreOrderTraversal {
   for (int i = 0; i < preOrder.size(); i++) {
    System.out.print(preOrder.get(i) + " ");
   }
-
  }
 }
