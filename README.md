@@ -327,7 +327,7 @@ return topo;
 
 1. Perform a normal topological sort on the DAG.
 2. if at the end of the algorithm if number of elements in the result array < V. Cycle is present.
-3. if result array.lenght == V no cycle. 
+3. if result array.length == V no cycle. 
 
 
 
