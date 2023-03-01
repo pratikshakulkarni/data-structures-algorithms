@@ -3,6 +3,72 @@
 ---
 ## Trees: 
 
+###
+-Binary Trees
+-Binary Search Tree
+
+###
+1. Node 
+2. Edges
+3. Leaf Nodes -> no children
+4. height -> starts from root and 1
+5. level -> starts from root and 0
+
+### 
+Important Formulas 
+
+- Nodes at each level are -> (2 * i) -- where i is the level
+- Maximum number of nodes in a Bt with a height h is [(2^h)-1]
+
+
+### Representation of a Node
+```
+Node {
+Node left,right;
+int data;
+}
+```
+
+### Type of traversals
+
+1. Breadth First Search
+- Level order Traversal (level wise)
+
+2. Depth First Search 
+- InOrder (Left, node, right)
+- PreOrder (Node, left, right)
+- PostOrder (left, right, Node)
+
+###
+InOrder Traversal:
+
+1. Recursive Approach:
+```
+1. if current root is null return nothing
+2. Start visiting left children recursively
+3. Save the data in anu resultant array
+4. Start visiting right children recursively
+------------------------------------------------
+inorder(Node root){
+if(root == null) return
+inorder(root.left);
+result.add(root.data);
+inorder(root.right);
+}
+```
+
+2. Iterative Approach
+``` 
+1. Maintain a stack of type Node
+2. push the root into the stack and do move to roots left i.e. root = root.left
+3. Iterate till either stack is not empty or root is not null
+  while(root is not null)
+    push the root into stack
+    root=root.left
+4. out of while means root is now null so pop the top of the stack root = stack.pop();
+5. traverse to the right of the root, root= root.right
+
+```
 
 ---
 ## Graphs

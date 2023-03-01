@@ -2,53 +2,50 @@ package trees.binaryTree;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /***
  @author: Pratiksha Kulkarni
  date: 1/7/2023
  */
 
-class PostNode {
-    int data;
-    PostNode left, right;
-    PostNode(int data) {
-        this.data = data;
-        left = null;
-        right = null;
-    }
-    PostNode() {
 
-    }
-}
 public class PostOrderTraversal {
+    private static void postOrderRecursively(Node root) {
+        if (root == null) return;
+        postOrderRecursively(root.left);
+        postOrderRecursively(root.right);
+        System.out.print(" " + root.data);
+    }
 
-    public void postOrderTraversal(PostNode root, List<Integer> list){
-        if(root==null) return;
-        else{
-            postOrderTraversal(root.left,list);
-            postOrderTraversal(root.right,list);
-            list.add(root.data);
+    private static void postOrderIteratively(Node root) {
+
+        Stack<Node> st = new Stack<>();
+        Node prev = null;
+
+        if (root == null) return;
+
+        while (!st.isEmpty() || root != null) {
+            if (root != null) {
+                st.push(root);
+                root = root.left;
+            } else {
+                root = st.peek();
+                if (root.right == null || root.right == prev) {
+                    System.out.print(" " + st.pop().data);
+                    prev = root;
+                    root = null;
+                } else root = root.right;
+            }
+
         }
     }
+
     public static void main(String[] args) {
-
-        PostOrderTraversal postOrderTraversal = new PostOrderTraversal();
-
-        List<Integer> postList = new ArrayList<>();
-
-        PostNode root = new PostNode(1);
-        root.left = new PostNode(2);
-        root.right = new PostNode(3);
-        root.left.left = new PostNode(4);
-        root.left.right = new PostNode(5);
-        root.right.left = new PostNode(6);
-        root.right.right = new PostNode(7);
-        root.left.right.left = new PostNode(8);
-
-        postOrderTraversal.postOrderTraversal(root,postList);
-
-
-        System.out.println("Traversal : ");
-        System.out.println(postList);
+        Node root = CreateBt.createTree();
+        System.out.println("Recursive approach ");
+        postOrderRecursively(root);
+        System.out.println("Iterative approach ");
+        postOrderIteratively(root);
     }
 }
