@@ -1,5 +1,7 @@
 package trees.binaryTree;
 
+import trees.Node;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;

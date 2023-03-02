@@ -2,7 +2,6 @@ package trees.binaryTree;
 
 import trees.Node;
 
-import javax.swing.tree.TreeNode;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -10,11 +9,10 @@ import java.util.Queue;
 
 /***
  @author: Pratiksha Kulkarni
- date: 1/7/2023
+ date: 3/2/2023
  */
-
-public class LevelOrderTraversal {
-    private static void levelOrder(Node root) {
+public class MaxDepthOfBt {
+    private static void maxDepthUsingLevelOrderTraversal(Node root) {
         if (root == null) return;
 
         List<List<Integer>> list = new ArrayList<>();
@@ -39,10 +37,21 @@ public class LevelOrderTraversal {
         System.out.println("Height " + height);
     }
 
+    private static int maxDepthUsingRecursion(Node root){
+        if(root == null) return 0;
+
+        int lh = maxDepthUsingRecursion(root.left);
+        int rh = maxDepthUsingRecursion(root.right);
+
+        return 1+Math.max(lh,rh);
+    }
     public static void main(String[] args) {
         Node root = CreateBt.createTree();
-        System.out.println("\n Level wise traversal : ");
-        levelOrder(root);
+
+        System.out.println("\n Max depth Using Level order traversal : ");
+        maxDepthUsingLevelOrderTraversal(root);
+
+        System.out.println("\n Max depth Using Recursion : ");
+        System.out.println(maxDepthUsingRecursion(root));
     }
 }
-

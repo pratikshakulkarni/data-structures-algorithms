@@ -34,13 +34,39 @@ int data;
 1. Breadth First Search
 - Level order Traversal (level wise)
 
+1.1 LevelOrder Traversal
+```
+1. Intialize a queue of type Node
+2. Insert the root into the queue
+3. while the q  is not empty 
+   3.1 check if q.peek().left is not null insert into queue.
+   3.2 check if q.peek().right is not null insert into queue.
+   3.3 add the q.pop() in resultant array
+4. end
+
+    private static void levelOrder(Node root) {
+        if (root == null) return;
+
+        List<Integer> subList = new ArrayList<>();
+        Queue<Node> q = new LinkedList<Node>();
+        q.offer(root);
+
+        while (!q.isEmpty()) {
+            if (q.peek().left != null) q.offer(q.peek().left);
+            if (q.peek().right != null) q.offer(q.peek().right);
+            subList.add(q.poll().data);
+        }
+        subList.forEach(System.out::print);
+    }
+```
+
 2. Depth First Search 
 - InOrder (Left, node, right)
 - PreOrder (Node, left, right)
 - PostOrder (left, right, Node)
 
 ###
-InOrder Traversal:
+2.1 InOrder Traversal:
 
 1. Recursive Approach:
 ```
@@ -70,6 +96,92 @@ inorder(root.right);
 
 ```
 
+2.2 PostOderTraversal
+1. Recursive Approach
+```
+postorder(Node root){
+if(root == null) return
+postorder(root.left);
+postorder(root.right);
+result.add(root.data);
+}
+```
+2. Iterative Approach 
+``` 
+Push all left nodes into the stack till it hits NULL.
+root = s.peek()
+if root.right = null or pre (Means we have traversed the right subtree already)
+We print root and pop it from s.
+Make pre = root
+root = null (So we dont go down to left child again)
+else
+root = root.right (Traverse the right subtree before printing root)
+Keep iterating till both the below conditions are met -
+Stack is empty and
+Root is NULL.
+```
+```  
+private static void postOrderIteratively(Node root) {
+
+        Stack<Node> st = new Stack<>();
+        Node prev = null;
+
+        if (root == null) return;
+
+        while (!st.isEmpty() || root != null) {
+            if (root != null) {
+                st.push(root);
+                root = root.left;
+            } else {
+                root = st.peek();
+                if (root.right == null || root.right == prev) {
+                    System.out.print(" " + st.pop().data);
+                    prev = root;
+                    root = null;
+                } else root = root.right;
+            }
+
+        }
+    }
+```
+
+### Views of a BT
+
+1. LEFT/RIGHT view of a BT:
+- Initialize a list of type Node
+- Start the recursion with root, list, and level=0
+- if root == null return
+- depending upon what side you have to view call the recursive method for that side
+- if the size of the list == the level add the node to the list
+- method(root->left,list,level+1)
+- method(root->right,list,level+1)
+
+```
+private static void printRightView(Node root, ArrayList<Node> list, int level) {
+    if (root == null) return;
+
+    if (level == list.size())
+        list.add(root);
+    printRightView(root.right, list, level + 1);
+    printRightView(root.left, list, level + 1);
+
+}
+```
+- Finding Max depth of the Binary tree - max depth is also the height of the BT
+- There are 2 ways of finding the max depth : 
+- Using Level order Traversal 
+- Using Recursion
+
+``` 
+   private static int maxDepthUsingRecursion(Node root){
+        if(root == null) return 0;
+
+        int lh = maxDepthUsingRecursion(root.left);
+        int rh = maxDepthUsingRecursion(root.right);
+
+        return 1+Math.max(lh,rh);
+    }
+```
 ---
 ## Graphs
 
